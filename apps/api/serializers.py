@@ -1,6 +1,8 @@
+from django.contrib.auth import models
+from django.db.models import fields
 from rest_framework import serializers
 from django.contrib.auth.models import User
-
+from .models import Persona
 
 class UserSerializers(serializers.Serializer):
     id = serializers.ReadOnlyField()
@@ -29,3 +31,15 @@ class UserSerializers(serializers.Serializer):
             raise serializers.ValidationError("Este nombre de usuario ya existe")
         else:
             return data
+        
+class PersonaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Persona
+        fields=(
+            'id',
+            'name',
+            'apellido',
+            'Genero'
+        )
+        
+    
